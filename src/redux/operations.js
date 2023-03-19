@@ -1,42 +1,109 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import {
-  fetchingError,
-  fetchingInProgress,
-  fetchingSuccess,
-} from './tasksSlice';
 
 axios.defaults.baseURL = 'https://62584f320c918296a49543e7.mockapi.io';
 
-export const fetchTasks = () => {
-  return async dispatch => {
-    dispatch(fetchingInProgress());
+export const fetchTasks = createAsyncThunk(
+  'tasks/fetchAll',
+  async (_, thunkAPI) => {
     try {
-      // ????
       const response = await axios.get('/tasks');
-      dispatch(fetchingSuccess(response.data));
-    } catch (err) {
-      dispatch(fetchingError(err.message));
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
-  };
-};
+  }
+);
 
-// **************
+export const addTask = createAsyncThunk(
+  'tasks/addTask',
+  async (text, thunkAPI) => {
+    try {
+      const response = await axios.post('/tasks', { text });
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
-// import axios from "axios";
-// import {
-//   fetchingInProgress,
-//   fetchingSuccess,
-//   fetchingError,
-// } from "./tasksSlice";
+export const deleteTask = createAsyncThunk(
+  'tasks/deleteTask',
+  async (taskId, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/tasks/${taskId}`);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
-// axios.defaults.baseURL = "https://62584f320c918296a49543e7.mockapi.io";
+export const toggleCompleted = createAsyncThunk(
+  'tasks/toggleCompleted',
+  async (task, thunkAPI) => {
+    try {
+      const response = await axios.put(`/tasks/${task.id}`, {
+        completed: !task.completed,
+      });
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
-// export const fetchTasks = () => async dispatch => {
-//   try {
-//     dispatch(fetchingInProgress());
-//     const response = await axios.get("/tasks");
-//     dispatch(fetchingSuccess(response.data));
-//   } catch (e) {
-//     dispatch(fetchingError(e.message));
+// export const fetchTasks = createAsyncThunk(
+//   'tasks/fetchTasks',
+//   async (_, thunkAPI) => {
+//     try {
+//       const response = await axios.get('/tasks');
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
 //   }
-// };
+// );
+
+// export const addTask = createAsyncThunk(
+//   'tasks/addTask',
+//   async (text, thunkAPI) => {
+//     try {
+//       const response = await axios.post('/tasks', { text });
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
+//   }
+// );
+
+// export const deleteTask = createAsyncThunk(
+//   'tasks/deleteTask',
+//   async (taskId, thunkAPI) => {
+//     try {
+//       const response = await axios.delete(`/tasks/${taskId}`);
+//       return response.data;
+//     } catch (err) {
+//       return thunkAPI.rejectWithValue(err.message);
+//     }
+//   }
+// );
+
+// export const toggleCompleted = createAsyncThunk(
+//   'tasks/toggleCompleted',
+//   async (task, thunkAPI) => {
+//     try {
+//       const response = await axios.put(`/tasks/${task.id}`, {
+//         completed: !task.completed,
+//       });
+
+//       return response.data;
+//     } catch (err) {
+//       return thunkAPI.rejectWithValue(err.message);
+//     }
+//   }
+// );
+
+//  ??    [fetchTask.pending]
+//  **    [fetchTask.fulfilled]
+//  !!    [fetchTask.rejected]
