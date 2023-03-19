@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/goit-react-lesson-07-async-redux-1/static/css/main.107bb7e2.css",
-    "main.js": "/goit-react-lesson-07-async-redux-1/static/js/main.f470c794.js",
+    "main.css": "/goit-react-lesson-07-async-redux-1/static/css/main.068eb5f6.css",
+    "main.js": "/goit-react-lesson-07-async-redux-1/static/js/main.b11f03cd.js",
     "index.html": "/goit-react-lesson-07-async-redux-1/index.html",
-    "main.107bb7e2.css.map": "/goit-react-lesson-07-async-redux-1/static/css/main.107bb7e2.css.map",
-    "main.f470c794.js.map": "/goit-react-lesson-07-async-redux-1/static/js/main.f470c794.js.map"
+    "main.068eb5f6.css.map": "/goit-react-lesson-07-async-redux-1/static/css/main.068eb5f6.css.map",
+    "main.b11f03cd.js.map": "/goit-react-lesson-07-async-redux-1/static/js/main.b11f03cd.js.map"
   },
   "entrypoints": [
-    "static/css/main.107bb7e2.css",
-    "static/js/main.f470c794.js"
+    "static/css/main.068eb5f6.css",
+    "static/js/main.b11f03cd.js"
   ]
 }
